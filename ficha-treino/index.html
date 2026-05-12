@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Treino — Márcio</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --card2: #f7f8fa;
+  --text: #1a1d23;
+  --sub: #6b7280;
+  --border: #e5e7eb;
+  --A: #2563eb;
+  --A-light: #eff6ff;
+  --A-mid: #bfdbfe;
+  --B: #059669;
+  --B-light: #ecfdf5;
+  --B-mid: #a7f3d0;
+  --C: #dc2626;
+  --C-light: #fef2f2;
+  --C-mid: #fecaca;
+  --D: #7c3aed;
+  --D-light: #f5f3ff;
+  --D-mid: #ddd6fe;
+  --done-bg: #f0fdf4;
+  --done-border: #86efac;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,.12);
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+h1,h2,h3,.label { font-family: 'Montserrat', sans-serif; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: #1a1d23;
+  color: #fff;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.topbar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 12px;
+}
+.topbar-brand { display:flex; align-items:center; gap:10px; }
+.topbar-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.topbar-name { font-family:'Montserrat',sans-serif; font-weight:800; font-size:16px; letter-spacing:.5px; }
+.topbar-sub { font-size:10px; color:#9ca3af; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+
+
+
+/* ── TABS ── */
+.tabs-wrap {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 56px;
+  z-index: 190;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.tabs {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display:none; }
+
+.tab {
+  flex: 1;
+  min-width: 110px;
+  padding: 0 4px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  gap: 2px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Montserrat', sans-serif;
+}
+.tab:hover { background: #f9fafb; }
+.tab-day { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--sub); }
+.tab-name { font-size: 13px; font-weight: 800; color: var(--text); letter-spacing: .3px; }
+.tab-count { font-size: 9px; font-weight: 600; color: var(--sub); }
+
+.tab[data-d="A"].active { border-bottom-color: var(--A); }
+.tab[data-d="A"].active .tab-name { color: var(--A); }
+.tab[data-d="B"].active { border-bottom-color: var(--B); }
+.tab[data-d="B"].active .tab-name { color: var(--B); }
+.tab[data-d="C"].active { border-bottom-color: var(--C); }
+.tab[data-d="C"].active .tab-name { color: var(--C); }
+.tab[data-d="D"].active { border-bottom-color: var(--D); }
+.tab[data-d="D"].active .tab-name { color: var(--D); }
+
+/* ── MAIN ── */
+.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 80px; }
+
+.panel { display:none; }
+.panel.active { display:block; animation: fadeUp .25s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── HERO CARD ── */
+.hero {
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.hero[data-d="A"] { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%); }
+.hero[data-d="B"] { background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%); }
+.hero[data-d="C"] { background: linear-gradient(135deg, #b91c1c 0%, #dc2626 50%, #ef4444 100%); }
+.hero[data-d="D"] { background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 50%, #8b5cf6 100%); }
+
+.hero::after {
+  content: attr(data-letter);
+  position: absolute; right: 16px; top: -10px;
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 900; font-size: 120px;
+  opacity: .12; color: #fff; line-height: 1;
+  pointer-events: none;
+}
+.hero-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+.hero-label { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; opacity:.8; margin-bottom:4px; }
+.hero-title { font-family:'Montserrat',sans-serif; font-weight:900; font-size:28px; line-height:1; }
+.hero-sub { font-size:12px; opacity:.85; margin-top:4px; font-weight:500; }
+.hero-focus {
+  background: rgba(255,255,255,.15);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  max-width: 260px;
+}
+.hero-chips { display:flex; gap:8px; flex-wrap:wrap; }
+.hero-chip {
+  background: rgba(255,255,255,.2);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex; flex-direction:column; gap:1px;
+}
+.hero-chip-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:2px; opacity:.8; }
+.hero-chip-val { font-family:'Montserrat',sans-serif; font-weight:800; font-size:18px; line-height:1; }
+
+/* ── PROGRESS ── */
+.progress-row {
+  display: flex; align-items:center; gap:10px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: var(--shadow);
+}
+.progress-text { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; white-space:nowrap; min-width:52px; }
+.progress-track { flex:1; height:8px; background:#e5e7eb; border-radius:99px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:99px; transition: width .4s ease; }
+.reset-btn {
+  font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700;
+  color: var(--sub); background:none; border:1.5px solid var(--border);
+  border-radius:8px; padding:5px 10px; cursor:pointer; transition:all .15s;
+  letter-spacing:.5px; white-space:nowrap;
+}
+.reset-btn:hover { border-color:#9ca3af; color:var(--text); }
+
+/* ── SECTION LABEL ── */
+.section-lbl {
+  display: flex; align-items:center; gap:10px;
+  margin: 20px 0 10px;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:2.5px; color:var(--sub);
+}
+.section-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ── EXERCISE CARD ── */
+.ex-card {
+  background: var(--card);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow .2s, border-color .2s, transform .1s;
+  box-shadow: var(--shadow);
+}
+.ex-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+.ex-card:active { transform: translateY(0); }
+.ex-card.done {
+  background: var(--done-bg);
+  border-color: var(--done-border);
+  opacity: .65;
+}
+
+.ex-stripe { height:4px; }
+.ex-body { padding: 14px 16px; }
+
+.ex-header { display:flex; align-items:flex-start; gap:12px; }
+.ex-num {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px;
+  flex-shrink:0;
+  transition: all .2s;
+}
+.ex-card.done .ex-num { background:#22c55e !important; color:#fff !important; }
+
+.ex-title-wrap { flex:1; min-width:0; }
+.ex-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:5px; }
+.tag {
+  font-family:'Montserrat',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:1px;
+  padding: 2px 8px; border-radius:99px; text-transform:uppercase;
+}
+.tag-anchor { background:#fef3c7; color:#92400e; }
+.tag-drop { background:#fee2e2; color:#991b1b; }
+.tag-rest { background:#fae8ff; color:#7e22ce; }
+.tag-super { background:#fff7ed; color:#c2410c; }
+.tag-uni { background:#e0f2fe; color:#075985; }
+
+.ex-name {
+  font-family:'Montserrat',sans-serif;
+  font-size:14px; font-weight:700; color:var(--text); line-height:1.3;
+}
+.ex-card.done .ex-name { text-decoration:line-through; color:var(--sub); }
+
+.ex-check {
+  width:26px; height:26px; flex-shrink:0;
+  border-radius:50%; border:2px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s; margin-top:2px;
+}
+.ex-card.done .ex-check { background:#22c55e; border-color:#22c55e; }
+.ex-check svg { width:13px; height:13px; color:#fff; display:none; }
+.ex-card.done .ex-check svg { display:block; }
+
+/* Stats row */
+.ex-stats {
+  display:flex; gap:0;
+  margin-top:12px;
+  background: var(--card2);
+  border-radius: 10px;
+  overflow:hidden;
+  border: 1px solid var(--border);
+}
+.ex-stat { flex:1; padding:8px 10px; text-align:center; }
+.ex-stat + .ex-stat { border-left: 1px solid var(--border); }
+.ex-stat-label { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--sub); margin-bottom:3px; }
+.ex-stat-val { font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px; line-height:1; }
+
+/* Load input */
+.load-row {
+  display:flex; align-items:center; gap:8px;
+  margin-top:10px;
+  padding: 8px 10px;
+  background: var(--card2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.load-lbl { font-size:10px; font-weight:700; font-family:'Montserrat',sans-serif; color:var(--sub); white-space:nowrap; }
+.load-input {
+  flex:1; max-width:90px;
+  font-family:'Montserrat',sans-serif; font-size:15px; font-weight:700;
+  border:none; outline:none; background:transparent;
+  color:var(--text); padding:0;
+}
+.load-input::placeholder { color:#d1d5db; font-size:13px; font-weight:500; }
+.load-unit { font-size:11px; color:var(--sub); font-weight:600; }
+
+/* Timers */
+.timers-row {
+  display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;
+}
+.timer-btn {
+  font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700;
+  padding:5px 12px; border-radius:8px; cursor:pointer;
+  border:1.5px solid var(--border); background:#fff;
+  color:var(--sub); transition:all .15s;
+  display:flex; align-items:center; gap:4px;
+}
+.timer-btn:hover { border-color:#9ca3af; color:var(--text); }
+
+/* Note */
+.ex-note {
+  margin-top:10px; font-size:11px; color:#6b7280;
+  line-height:1.7; padding:8px 12px;
+  background: #f9fafb; border-radius:8px;
+  border-left:3px solid var(--border);
+}
+.ex-note strong { color:#374151; font-weight:600; }
+.ex-technique {
+  margin-top:6px; font-size:11px; font-weight:700;
+  display:flex; align-items:center; gap:6px; color:#7c3aed;
+}
+
+/* ── FINISHER ── */
+.finisher {
+  background:#fff; border-radius:14px;
+  border:1.5px dashed var(--border);
+  padding:16px; margin-top:12px;
+  box-shadow:var(--shadow);
+}
+.finisher-title {
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:12px; color:var(--sub);
+}
+.fin-item {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 0; cursor:pointer;
+  border-bottom:1px solid var(--border); transition:opacity .15s;
+}
+.fin-item:last-of-type { border-bottom:none; }
+.fin-item.done-f { opacity:.45; }
+.fin-cb {
+  width:18px; height:18px; border-radius:50%;
+  border:2px solid var(--border); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.fin-item.done-f .fin-cb { background:#22c55e; border-color:#22c55e; }
+.fin-cb::after { content:'✓'; font-size:10px; font-weight:700; color:#fff; display:none; }
+.fin-item.done-f .fin-cb::after { display:block; }
+.fin-text { font-size:12px; font-weight:500; color:var(--text); }
+.fin-item.done-f .fin-text { text-decoration:line-through; color:var(--sub); }
+
+/* ── COLLAPSE ── */
+.collapse-btn {
+  width:100%; text-align:left;
+  background:#fff; border:1.5px solid var(--border);
+  border-radius:12px; padding:14px 16px;
+  display:flex; justify-content:space-between; align-items:center;
+  cursor:pointer; margin-top:12px;
+  font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700;
+  color:var(--text); box-shadow:var(--shadow); transition:all .15s;
+}
+.collapse-btn:hover { border-color:#9ca3af; }
+.collapse-btn .arr { transition:transform .2s; font-size:14px; color:var(--sub); }
+.collapse-btn.open .arr { transform:rotate(180deg); }
+.collapse-body { display:none; }
+.collapse-body.open { display:block; animation:fadeUp .2s ease; }
+
+/* ── TECHNIQUES ── */
+.tech-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; }
+@media(max-width:520px){ .tech-grid{ grid-template-columns:1fr; } }
+.tech-card { background:#fff; border-radius:12px; border:1.5px solid var(--border); padding:14px; box-shadow:var(--shadow); }
+.tech-name { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:800; margin-bottom:6px; }
+.tech-desc { font-size:11px; color:var(--sub); line-height:1.7; }
+
+/* ── PROGRESSION ── */
+.prog-list { margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+.prog-item {
+  background:#fff; border-radius:12px; border:1.5px solid var(--border);
+  padding:12px 14px; display:flex; gap:12px; align-items:flex-start;
+  box-shadow:var(--shadow);
+}
+.prog-icon { font-size:18px; flex-shrink:0; }
+.prog-text { font-size:11px; color:#6b7280; line-height:1.7; }
+.prog-text strong { color:var(--text); font-weight:700; }
+
+/* ── TIMER TOAST ── */
+#toast {
+  position:fixed; bottom:20px; right:16px;
+  background:#1a1d23; color:#fff;
+  border-radius:16px;
+  padding:12px 18px;
+  display:none; align-items:center; gap:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+  z-index:9999;
+  animation:slideUp .3s ease;
+  min-width:160px;
+}
+#toast.show { display:flex; }
+@keyframes slideUp{ from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+#toast.urgent { background:#dc2626; }
+#toast-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.6); }
+#toast-time { font-family:'Montserrat',sans-serif; font-weight:900; font-size:26px; line-height:1; }
+#toast-close { cursor:pointer; opacity:.5; font-size:18px; margin-left:4px; line-height:1; }
+#toast-close:hover { opacity:1; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; padding:30px 16px;
+  font-size:10px; color:#9ca3af;
+  font-weight:600; letter-spacing:1px; text-transform:uppercase;
+}
+
+@media(max-width:480px){
+  .hero-title { font-size:22px; }
+  .topbar-sub { display:none; }
+  .hero-focus { max-width:100%; font-size:10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="topbar-icon">💪</div>
+      <div>
+        <div class="topbar-name">Márcio</div>
+        <div class="topbar-sub">Hipertrofia · Mai–Jul 2026 · 4×/semana</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" data-d="A" onclick="switchDay('A')">
+      <span class="tab-day">Segunda</span>
+      <span class="tab-name">Série A</span>
+      <span class="tab-count" id="tc-A">0/8</span>
+    </button>
+    <button class="tab" data-d="B" onclick="switchDay('B')">
+      <span class="tab-day">Quarta</span>
+      <span class="tab-name">Série B</span>
+      <span class="tab-count" id="tc-B">0/8</span>
+    </button>
+    <button class="tab" data-d="C" onclick="switchDay('C')">
+      <span class="tab-day">Quinta</span>
+      <span class="tab-name">Série C</span>
+      <span class="tab-count" id="tc-C">0/8</span>
+    </button>
+    <button class="tab" data-d="D" onclick="switchDay('D')">
+      <span class="tab-day">Sexta</span>
+      <span class="tab-name">Série D</span>
+      <span class="tab-count" id="tc-D">0/9</span>
+    </button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════ SÉRIE A ══════════ -->
+<div class="panel active" id="panel-A">
+
+  <div class="hero" data-d="A" data-letter="A">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Segunda-feira</div>
+        <div class="hero-title">Upper A</div>
+        <div class="hero-sub">Peito Superior · Ombros · Tríceps</div>
+      </div>
+      <div class="hero-focus">🎯 Empurrão — ênfase em peito superior e tríceps cabeça longa</div>
+    </div>
+    <div class="hero-chips">
+      <div class="hero-chip"><span class="hero-chip-label">Série</span><span class="hero-chip-val">60s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Exercício</span><span class="hero-chip-val">75s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Âncora</span><span class="hero-chip-val">120s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Aquecimento</span><span class="hero-chip-val" style="font-size:14px">5 min esteira</span></div>
+    </div>
+  </div>
+
+  <div class="progress-row">
+    <span class="progress-text" style="color:var(--A)" id="pp-A">0/8</span>
+    <div class="progress-track"><div class="progress-fill" id="pf-A" style="background:var(--A);width:0%"></div></div>
+    <button class="reset-btn" onclick="resetDay('A')">Resetar</button>
+  </div>
+
+  <div class="section-lbl">Peito</div>
+
+  <!-- 1 -->
+  <div class="ex-card" id="A-1" onclick="toggleEx('A','1')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">01</div>
+        <div class="ex-title-wrap">
+          <div class="ex-tags"><span class="tag tag-anchor">⚓ Âncora</span></div>
+          <div class="ex-name">Supino Inclinado c/ Barra</div>
+        </div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">4</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">6–8</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">120s</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Cadência</div><div class="ex-stat-val" style="font-size:12px;color:var(--sub)">Moderada</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-1" type="number" placeholder="ex: 40" oninput="saveLoad('A','1',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()">
+        <button class="timer-btn" onclick="startTimer(120,'Descanso Âncora')">⏱ 120s</button>
+        <button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button>
+      </div>
+      <div class="ex-note"><strong>Exercício principal do dia — anote sempre a carga.</strong> Cotovelos a 45°, amplitude total. Progrida 2,5 kg quando completar 4×8 com boa técnica.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="ex-card" id="A-2" onclick="toggleEx('A','2')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">02</div>
+        <div class="ex-title-wrap"><div class="ex-name">Crucifixo Inclinado Máquina</div></div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">4</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">10–12</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">75s</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Foco</div><div class="ex-stat-val" style="font-size:12px;color:var(--sub)">Clavicular</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-2" type="number" placeholder="ex: 30" oninput="saveLoad('A','2',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div>
+      <div class="ex-note">Foco total no peito superior. <strong>Segure 1 segundo no pico.</strong> Amplitude máxima na abertura.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="ex-card" id="A-3" onclick="toggleEx('A','3')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">03</div>
+        <div class="ex-title-wrap">
+          <div class="ex-tags"><span class="tag tag-drop">Drop Set</span></div>
+          <div class="ex-name">Crucifixo Cross Polia Baixa</div>
+        </div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">3</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">12–15</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">60s</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Foco</div><div class="ex-stat-val" style="font-size:12px;color:var(--sub)">Inferior</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-3" type="number" placeholder="ex: 12" oninput="saveLoad('A','3',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div>
+      <div class="ex-note">Polia baixa ativa feixe inferior e esternal. Cruzar as mãos no topo para máxima adução.</div>
+      <div class="ex-technique">⚡ Última série: Drop Set — reduz 30% ao falhar, continua sem parar.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="ex-card" id="A-4" onclick="toggleEx('A','4')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">04</div>
+        <div class="ex-title-wrap"><div class="ex-name">Supino Vertical Máquina</div></div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">3</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">10–12</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">75s</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-4" type="number" placeholder="ex: 50" oninput="saveLoad('A','4',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div>
+      <div class="ex-note">Pegada na largura dos ombros. <strong>Não trave os cotovelos</strong> no topo.</div>
+    </div>
+  </div>
+
+  <div class="section-lbl">Ombros</div>
+
+  <!-- 5 -->
+  <div class="ex-card" id="A-5" onclick="toggleEx('A','5')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">05</div>
+        <div class="ex-title-wrap"><div class="ex-name">Desenvolvimento Ombro Máquina</div></div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">4</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">10–12</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">75s</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-5" type="number" placeholder="ex: 40" oninput="saveLoad('A','5',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div>
+      <div class="ex-note">Pegada confortável. <strong>Não arqueie a lombar.</strong> Movimento vertical limpo.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="ex-card" id="A-6" onclick="toggleEx('A','6')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">06</div>
+        <div class="ex-title-wrap">
+          <div class="ex-tags"><span class="tag tag-drop">Drop Set</span><span class="tag tag-uni">Unilateral</span></div>
+          <div class="ex-name">Elevação Lateral c/ Halter (Unilateral)</div>
+        </div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">3</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">12–15</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">60s</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-6" type="number" placeholder="ex: 8" oninput="saveLoad('A','6',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div>
+      <div class="ex-note">Cotovelo levemente dobrado. Suba até a linha do ombro. Controle a descida em 3s.</div>
+      <div class="ex-technique">⚡ Última série: Drop Set.</div>
+    </div>
+  </div>
+
+  <div class="section-lbl">Tríceps</div>
+
+  <!-- 7 -->
+  <div class="ex-card" id="A-7" onclick="toggleEx('A','7')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">07</div>
+        <div class="ex-title-wrap"><div class="ex-name">Tríceps Testa Corda na Polia no Banco</div></div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">4</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">10–12</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">75s</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Foco</div><div class="ex-stat-val" style="font-size:12px;color:var(--sub)">Cab. Longa</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-7" type="number" placeholder="ex: 15" oninput="saveLoad('A','7',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div>
+      <div class="ex-note"><strong>Cabeça longa em pleno alongamento.</strong> Cotovelos fixos apontados para cima. Essencial para espessura do tríceps.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="ex-card" id="A-8" onclick="toggleEx('A','8')">
+    <div class="ex-stripe" style="background:var(--A)"></div>
+    <div class="ex-body">
+      <div class="ex-header">
+        <div class="ex-num" style="background:var(--A-light);color:var(--A)">08</div>
+        <div class="ex-title-wrap">
+          <div class="ex-tags"><span class="tag tag-rest">Rest-Pause</span></div>
+          <div class="ex-name">Tríceps Corda na Polia</div>
+        </div>
+        <div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div>
+      </div>
+      <div class="ex-stats">
+        <div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--A)">3</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--A)">12–15</div></div>
+        <div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--A)">60s</div></div>
+      </div>
+      <div class="load-row" onclick="event.stopPropagation()">
+        <span class="load-lbl">Carga:</span>
+        <input class="load-input" id="ld-A-8" type="number" placeholder="ex: 20" oninput="saveLoad('A','8',this.value)">
+        <span class="load-unit">kg</span>
+      </div>
+      <div class="timers-row" onclick="event.stopPropagation()">
+        <button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button>
+        <button class="timer-btn" onclick="startTimer(15,'Rest-Pause')">⏱ 15s Rest-Pause</button>
+      </div>
+      <div class="ex-note">Abrir a corda no final para máxima contração. Cotovelos colados ao corpo.</div>
+      <div class="ex-technique">⚡ Última série: Rest-Pause — pare 15s, faça +4–6 reps.</div>
+    </div>
+  </div>
+
+  <div class="finisher">
+    <div class="finisher-title">🏁 Finalização — Abdômen</div>
+    <div class="fin-item" id="fn-A-1" onclick="toggleFin('A','1')"><div class="fin-cb"></div><span class="fin-text">Prancha Frontal · 3 × 45–60s · Descanso 45s</span></div>
+  </div>
+</div>
+<!-- FIM A -->
+
+
+<!-- ══════════ SÉRIE B ══════════ -->
+<div class="panel" id="panel-B">
+  <div class="hero" data-d="B" data-letter="B">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Quarta-feira</div>
+        <div class="hero-title">Lower</div>
+        <div class="hero-sub">Pernas · Glúteo · Panturrilha · Core</div>
+      </div>
+      <div class="hero-focus">🎯 Membros inferiores — volume e força</div>
+    </div>
+    <div class="hero-chips">
+      <div class="hero-chip"><span class="hero-chip-label">Série</span><span class="hero-chip-val">60s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Exercício</span><span class="hero-chip-val">90s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Âncora</span><span class="hero-chip-val">120s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Aquecimento</span><span class="hero-chip-val" style="font-size:14px">5 min esteira</span></div>
+    </div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-text" style="color:var(--B)" id="pp-B">0/8</span>
+    <div class="progress-track"><div class="progress-fill" id="pf-B" style="background:var(--B);width:0%"></div></div>
+    <button class="reset-btn" onclick="resetDay('B')">Resetar</button>
+  </div>
+  <div class="section-lbl">Quadríceps / Posterior</div>
+
+  <div class="ex-card" id="B-1" onclick="toggleEx('B','1')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">01</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-anchor">⚓ Âncora</span></div><div class="ex-name">Agachamento c/ Barra Livre ou Hack Machine</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">8–10</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">120s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-1" type="number" placeholder="ex: 60" oninput="saveLoad('B','1',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(120,'Descanso Âncora')">⏱ 120s</button></div><div class="ex-note"><strong>ANOTE A CARGA.</strong> Profundidade total (coxa paralela ou abaixo). Se barra livre, peça ajuda do monitor inicialmente.</div></div></div>
+
+  <div class="ex-card" id="B-2" onclick="toggleEx('B','2')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">02</div><div class="ex-title-wrap"><div class="ex-name">Leg Press 45°</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">90s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-2" type="number" placeholder="ex: 120" oninput="saveLoad('B','2',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(90,'Descanso')">⏱ 90s</button></div><div class="ex-note">Pés na largura dos ombros. Desça até 90° de joelho. <strong>Não trave os joelhos</strong> no topo.</div></div></div>
+
+  <div class="ex-card" id="B-3" onclick="toggleEx('B','3')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">03</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-drop">Drop Set</span></div><div class="ex-name">Cadeira Extensora</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-3" type="number" placeholder="ex: 35" oninput="saveLoad('B','3',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Segure <strong>2s no topo</strong>. Controle a descida em 3s. Isola o quadríceps.</div><div class="ex-technique">⚡ Última série: Drop Set.</div></div></div>
+
+  <div class="ex-card" id="B-4" onclick="toggleEx('B','4')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">04</div><div class="ex-title-wrap"><div class="ex-name">Mesa Flexora</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-4" type="number" placeholder="ex: 30" oninput="saveLoad('B','4',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Controle a descida (3s). <strong>Não use impulso.</strong> Contrai o glúteo durante o movimento.</div></div></div>
+
+  <div class="ex-card" id="B-5" onclick="toggleEx('B','5')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">05</div><div class="ex-title-wrap"><div class="ex-name">Afundo no Smith</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps/Lado</div><div class="ex-stat-val" style="color:var(--B)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">75s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-5" type="number" placeholder="ex: 20" oninput="saveLoad('B','5',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div><div class="ex-note">Joelho traseiro quase toca o chão. Excelente para glúteo e posterior de coxa.</div></div></div>
+
+  <div class="section-lbl">Cadeiras · Panturrilha</div>
+
+  <div class="ex-card" id="B-6" onclick="toggleEx('B','6')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">06</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-super">Superset</span></div><div class="ex-name">Cadeira Abdutora + Cadeira Adutora</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">15–20</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">45s</div></div></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(20,'Entre Superset')">⏱ 20s entre</button><button class="timer-btn" onclick="startTimer(45,'Descanso')">⏱ 45s</button></div><div class="ex-note">Abdutora → 20s descanso → Adutora. <strong>Sem pausa entre os dois.</strong> Descanso 45s após o par.</div></div></div>
+
+  <div class="ex-card" id="B-7" onclick="toggleEx('B','7')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">07</div><div class="ex-title-wrap"><div class="ex-name">Gêmeos Sentado</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">15–20</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-7" type="number" placeholder="ex: 25" oninput="saveLoad('B','7',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Amplitude total — calcanhar abaixo da plataforma. <strong>Segure 1s no topo.</strong></div></div></div>
+
+  <div class="ex-card" id="B-8" onclick="toggleEx('B','8')"><div class="ex-stripe" style="background:var(--B)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--B-light);color:var(--B)">08</div><div class="ex-title-wrap"><div class="ex-name">Flexão Plantar no Smith</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--B)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--B)">Até falha</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--B)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-B-8" type="number" placeholder="ex: 40" oninput="saveLoad('B','8',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Pés levemente afastados. <strong>Última série até a falha concêntrica.</strong></div></div></div>
+
+  <div class="finisher">
+    <div class="finisher-title">🏁 Finalização — Circuito Core (3×)</div>
+    <div class="fin-item" id="fn-B-1" onclick="toggleFin('B','1')"><div class="fin-cb"></div><span class="fin-text">Prancha Lateral · 30s cada lado</span></div>
+    <div class="fin-item" id="fn-B-2" onclick="toggleFin('B','2')"><div class="fin-cb"></div><span class="fin-text">Russian Twist · 20 reps</span></div>
+    <div class="fin-item" id="fn-B-3" onclick="toggleFin('B','3')"><div class="fin-cb"></div><span class="fin-text">ABS Infra Barra Paralela · 15 reps · Descanso 60s entre circuitos</span></div>
+  </div>
+</div>
+<!-- FIM B -->
+
+
+<!-- ══════════ SÉRIE C ══════════ -->
+<div class="panel" id="panel-C">
+  <div class="hero" data-d="C" data-letter="C">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Quinta-feira</div>
+        <div class="hero-title">Upper B</div>
+        <div class="hero-sub">Costas (Espessura) · Bíceps · Trapézio</div>
+      </div>
+      <div class="hero-focus">🎯 Puxada — espessura de costas e pico de bíceps</div>
+    </div>
+    <div class="hero-chips">
+      <div class="hero-chip"><span class="hero-chip-label">Série</span><span class="hero-chip-val">60s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Exercício</span><span class="hero-chip-val">75s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Âncora</span><span class="hero-chip-val">120s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Aquecimento</span><span class="hero-chip-val" style="font-size:14px">5 min esteira</span></div>
+    </div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-text" style="color:var(--C)" id="pp-C">0/8</span>
+    <div class="progress-track"><div class="progress-fill" id="pf-C" style="background:var(--C);width:0%"></div></div>
+    <button class="reset-btn" onclick="resetDay('C')">Resetar</button>
+  </div>
+  <div class="section-lbl">Costas — Espessura</div>
+
+  <div class="ex-card" id="C-1" onclick="toggleEx('C','1')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">01</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-anchor">⚓ Âncora</span></div><div class="ex-name">Remada Curvada no Smith</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">6–8</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">120s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-1" type="number" placeholder="ex: 50" oninput="saveLoad('C','1',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(120,'Descanso Âncora')">⏱ 120s</button></div><div class="ex-note"><strong>ANOTE A CARGA.</strong> Pegada pronada, torso a 45°. Puxe até o umbigo. Máxima espessura de costas.</div></div></div>
+
+  <div class="ex-card" id="C-2" onclick="toggleEx('C','2')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">02</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-uni">Unilateral</span></div><div class="ex-name">Remada Unilateral c/ Halter</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">75s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-2" type="number" placeholder="ex: 24" oninput="saveLoad('C','2',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div><div class="ex-note"><strong>⚠️ Comece sempre pelo lado esquerdo.</strong> Apoie o joelho. Puxe o cotovelo para trás e para cima.</div></div></div>
+
+  <div class="ex-card" id="C-3" onclick="toggleEx('C','3')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">03</div><div class="ex-title-wrap"><div class="ex-name">Remada Baixa na Polia (Peg Aberta)</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">75s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-3" type="number" placeholder="ex: 40" oninput="saveLoad('C','3',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div><div class="ex-note">Apertar escápulas no final. Peito para frente. Controle o retorno (3s).</div></div></div>
+
+  <div class="ex-card" id="C-4" onclick="toggleEx('C','4')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">04</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-drop">Drop Set</span></div><div class="ex-name">Remada Máquina Unilateral</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-4" type="number" placeholder="ex: 35" oninput="saveLoad('C','4',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Foco em sentir a contração do grande dorsal.</div><div class="ex-technique">⚡ Última série: Drop Set.</div></div></div>
+
+  <div class="ex-card" id="C-5" onclick="toggleEx('C','5')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">05</div><div class="ex-title-wrap"><div class="ex-name">Encolhimento Ombro c/ Halter</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-5" type="number" placeholder="ex: 20" oninput="saveLoad('C','5',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note"><strong>Segure 2s no topo.</strong> Não role os ombros. Movimento limpo e vertical.</div></div></div>
+
+  <div class="section-lbl">Bíceps</div>
+
+  <div class="ex-card" id="C-6" onclick="toggleEx('C','6')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">06</div><div class="ex-title-wrap"><div class="ex-name">Rosca Direta c/ Barra W</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">8–10</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">75s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-6" type="number" placeholder="ex: 20" oninput="saveLoad('C','6',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div><div class="ex-note">Cotovelos fixos. <strong>Não balance o tronco.</strong> ANOTE A CARGA. Base da progressão de bíceps.</div></div></div>
+
+  <div class="ex-card" id="C-7" onclick="toggleEx('C','7')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">07</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-uni">Unilateral</span></div><div class="ex-name">Rosca Martelo Unilateral c/ Halter</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-7" type="number" placeholder="ex: 14" oninput="saveLoad('C','7',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note"><strong>⚠️ Comece pelo lado esquerdo.</strong> Ativa braquial e braquiorradial — essencial para espessura do braço.</div></div></div>
+
+  <div class="ex-card" id="C-8" onclick="toggleEx('C','8')"><div class="ex-stripe" style="background:var(--C)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--C-light);color:var(--C)">08</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-drop">Drop Set</span><span class="tag tag-uni">+2 reps esq.</span></div><div class="ex-name">Rosca Concentrada c/ Halter</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--C)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--C)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--C)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-C-8" type="number" placeholder="ex: 12" oninput="saveLoad('C','8',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note"><strong>Faça +2 reps no lado esquerdo</strong> para corrigir assimetria. Máximo isolamento do pico do bíceps.</div><div class="ex-technique">⚡ Última série: Drop Set.</div></div></div>
+
+  <div class="finisher">
+    <div class="finisher-title">🏁 Finalização — Abdômen</div>
+    <div class="fin-item" id="fn-C-1" onclick="toggleFin('C','1')"><div class="fin-cb"></div><span class="fin-text">ABS Infra (Elevação de Pernas) · 3 × 15–20 reps · Descanso 45s</span></div>
+  </div>
+</div>
+<!-- FIM C -->
+
+
+<!-- ══════════ SÉRIE D ══════════ -->
+<div class="panel" id="panel-D">
+  <div class="hero" data-d="D" data-letter="D">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Sexta-feira</div>
+        <div class="hero-title">Upper C</div>
+        <div class="hero-sub">Peito Inferior · Costas Largura · Ombros · Braços</div>
+      </div>
+      <div class="hero-focus">🎯 Peito inferior + largura de costas + volume de braços</div>
+    </div>
+    <div class="hero-chips">
+      <div class="hero-chip"><span class="hero-chip-label">Série</span><span class="hero-chip-val">60s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Exercício</span><span class="hero-chip-val">75s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Âncora</span><span class="hero-chip-val">90s</span></div>
+      <div class="hero-chip"><span class="hero-chip-label">Aquecimento</span><span class="hero-chip-val" style="font-size:14px">5 min + mobilidade</span></div>
+    </div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-text" style="color:var(--D)" id="pp-D">0/9</span>
+    <div class="progress-track"><div class="progress-fill" id="pf-D" style="background:var(--D);width:0%"></div></div>
+    <button class="reset-btn" onclick="resetDay('D')">Resetar</button>
+  </div>
+  <div class="section-lbl">Peito Inferior / Médio</div>
+
+  <div class="ex-card" id="D-1" onclick="toggleEx('D','1')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">01</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-anchor">⚓ Âncora</span></div><div class="ex-name">Crucifixo Voador Máquina</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">90s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-1" type="number" placeholder="ex: 35" oninput="saveLoad('D','1',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(90,'Descanso Âncora')">⏱ 90s</button></div><div class="ex-note"><strong>ANOTE A CARGA.</strong> Foco no feixe inferior/esternal. Amplitude máxima. Peito colado no encosto.</div></div></div>
+
+  <div class="ex-card" id="D-2" onclick="toggleEx('D','2')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">02</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-super">Superset</span></div><div class="ex-name">Crucifixo Cross Polia Média + Polia Baixa</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3+3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">12 cada</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">75s</div></div></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(75,'Descanso')">⏱ 75s</button></div><div class="ex-note">Polia média → peito médio · Polia baixa → peito inferior. <strong>3 séries de cada alternando.</strong></div></div></div>
+
+  <div class="ex-card" id="D-3" onclick="toggleEx('D','3')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">03</div><div class="ex-title-wrap"><div class="ex-name">Pull Over</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-3" type="number" placeholder="ex: 16" oninput="saveLoad('D','3',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Transição peito/costas. <strong>Expande a caixa torácica.</strong> Cotovelo levemente dobrado.</div></div></div>
+
+  <div class="section-lbl">Costas — Largura</div>
+
+  <div class="ex-card" id="D-4" onclick="toggleEx('D','4')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">04</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-anchor">⚓ Âncora Costas</span></div><div class="ex-name">Pulley Frente Pegada Neutra Aberta</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">4</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">8–10</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">90s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-4" type="number" placeholder="ex: 55" oninput="saveLoad('D','4',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(90,'Descanso Âncora')">⏱ 90s</button></div><div class="ex-note"><strong>ANOTE A CARGA.</strong> Puxar até o peito superior. Foco total na largura do dorsal. Controle o retorno.</div></div></div>
+
+  <div class="ex-card" id="D-5" onclick="toggleEx('D','5')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">05</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-rest">Rest-Pause</span></div><div class="ex-name">Pull Down Corda</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-5" type="number" placeholder="ex: 30" oninput="saveLoad('D','5',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button><button class="timer-btn" onclick="startTimer(15,'Rest-Pause')">⏱ 15s Rest-Pause</button></div><div class="ex-note">Puxar abrindo a corda nas laterais. <strong>Alongar bem no topo.</strong></div><div class="ex-technique">⚡ Última série: Rest-Pause.</div></div></div>
+
+  <div class="section-lbl">Ombros · Braços</div>
+
+  <div class="ex-card" id="D-6" onclick="toggleEx('D','6')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">06</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-drop">Drop Set</span></div><div class="ex-name">Elevação Lateral Unilateral na Polia</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">15–20</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-6" type="number" placeholder="ex: 5" oninput="saveLoad('D','6',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Polia baixa, braço cruzado. Tensão constante. <strong>Melhor ativação do deltóide lateral</strong> que halter.</div><div class="ex-technique">⚡ Última série: Drop Set.</div></div></div>
+
+  <div class="ex-card" id="D-7" onclick="toggleEx('D','7')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">07</div><div class="ex-title-wrap"><div class="ex-name">Rosca Corda na Polia (Sentado)</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-7" type="number" placeholder="ex: 15" oninput="saveLoad('D','7',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Sentado isola mais. <strong>Supinar os punhos no topo</strong> para pico máximo do bíceps.</div></div></div>
+
+  <div class="ex-card" id="D-8" onclick="toggleEx('D','8')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">08</div><div class="ex-title-wrap"><div class="ex-tags"><span class="tag tag-rest">Rest-Pause</span></div><div class="ex-name">Tríceps Pulley Barra V</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">12–15</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-8" type="number" placeholder="ex: 25" oninput="saveLoad('D','8',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button><button class="timer-btn" onclick="startTimer(15,'Rest-Pause')">⏱ 15s RP</button></div><div class="ex-note">Cotovelos fixos ao corpo. Extensão completa. Controle o retorno (3s).</div><div class="ex-technique">⚡ Última série: Rest-Pause.</div></div></div>
+
+  <div class="ex-card" id="D-9" onclick="toggleEx('D','9')"><div class="ex-stripe" style="background:var(--D)"></div><div class="ex-body"><div class="ex-header"><div class="ex-num" style="background:var(--D-light);color:var(--D)">09</div><div class="ex-title-wrap"><div class="ex-name">Tríceps Frances Corda na Polia Baixa</div></div><div class="ex-check"><svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1,5 4,8 11,1"/></svg></div></div><div class="ex-stats"><div class="ex-stat"><div class="ex-stat-label">Séries</div><div class="ex-stat-val" style="color:var(--D)">3</div></div><div class="ex-stat"><div class="ex-stat-label">Reps</div><div class="ex-stat-val" style="color:var(--D)">10–12</div></div><div class="ex-stat"><div class="ex-stat-label">Descanso</div><div class="ex-stat-val" style="color:var(--D)">60s</div></div></div><div class="load-row" onclick="event.stopPropagation()"><span class="load-lbl">Carga:</span><input class="load-input" id="ld-D-9" type="number" placeholder="ex: 12" oninput="saveLoad('D','9',this.value)"><span class="load-unit">kg</span></div><div class="timers-row" onclick="event.stopPropagation()"><button class="timer-btn" onclick="startTimer(60,'Descanso')">⏱ 60s</button></div><div class="ex-note">Deitado ou sentado inclinado. <strong>Cabeça longa em pleno alongamento.</strong> Essencial para espessura do tríceps.</div></div></div>
+
+  <div class="finisher">
+    <div class="finisher-title">🏁 Finalização — Abdômen</div>
+    <div class="fin-item" id="fn-D-1" onclick="toggleFin('D','1')"><div class="fin-cb"></div><span class="fin-text">Prancha Frontal · 3 × 60s</span></div>
+    <div class="fin-item" id="fn-D-2" onclick="toggleFin('D','2')"><div class="fin-cb"></div><span class="fin-text">ABS Supra c/ Anilha · 3 × 20 reps · Descanso 45s</span></div>
+  </div>
+</div>
+<!-- FIM D -->
+
+
+<!-- TÉCNICAS -->
+<button class="collapse-btn" onclick="toggleCol(this,'tc-body')">
+  <span>📖 Glossário de Técnicas Avançadas</span><span class="arr">▾</span>
+</button>
+<div class="collapse-body" id="tc-body">
+  <div class="tech-grid">
+    <div class="tech-card"><div class="tech-name" style="color:#dc2626">Drop Set</div><div class="tech-desc">Ao atingir a falha, reduza imediatamente 30% da carga e continue sem descanso até nova falha. Máximo estresse metabólico.</div></div>
+    <div class="tech-card"><div class="tech-name" style="color:#7c3aed">Rest-Pause</div><div class="tech-desc">Ao falhar, descanse 15 segundos e execute mais 4–6 reps com a mesma carga. Aumenta volume sem adicionar séries.</div></div>
+    <div class="tech-card"><div class="tech-name" style="color:#c2410c">Superset</div><div class="tech-desc">Dois exercícios em sequência com mínimo descanso entre eles. Aumenta intensidade e economiza tempo.</div></div>
+    <div class="tech-card"><div class="tech-name" style="color:#92400e">Âncora</div><div class="tech-desc">Exercício principal do dia. Sempre registre a carga. Progrida 2,5 kg ao completar todas as séries no limite superior das reps.</div></div>
+  </div>
+</div>
+
+<!-- PROGRESSÃO -->
+<button class="collapse-btn" onclick="toggleCol(this,'pr-body')">
+  <span>📈 Protocolo de Progressão e Nutrição</span><span class="arr">▾</span>
+</button>
+<div class="collapse-body" id="pr-body">
+  <div class="prog-list">
+    <div class="prog-item"><span class="prog-icon">📓</span><div class="prog-text"><strong>Registre tudo.</strong> Anote exercício, carga, séries e reps após cada treino. Sem registro não há progressão consciente.</div></div>
+    <div class="prog-item"><span class="prog-icon">📈</span><div class="prog-text"><strong>Sobrecarga progressiva.</strong> Ao completar todas as séries no limite superior (ex: 4×8), aumente 2,5 kg na próxima sessão. Lei nº 1 da hipertrofia.</div></div>
+    <div class="prog-item"><span class="prog-icon">🥩</span><div class="prog-text"><strong>Proteína — seu maior gargalo.</strong> Meta mínima: 130g/dia. Você consome menos de 100g — metade do necessário para um ectomorfo de 68 kg. Frango, ovos, atum, whey.</div></div>
+    <div class="prog-item"><span class="prog-icon">⚡</span><div class="prog-text"><strong>Superávit calórico leve.</strong> Adicione 300–500 kcal/dia acima da manutenção. Sem isso, o peso não sobe.</div></div>
+    <div class="prog-item"><span class="prog-icon">😴</span><div class="prog-text"><strong>Sono.</strong> GH e testosterona são liberados durante o sono profundo. Tente regularizar para 7–8h/noite.</div></div>
+    <div class="prog-item"><span class="prog-icon">💊</span><div class="prog-text"><strong>Creatina.</strong> Continue: 3–5g/dia, todos os dias, incluindo dias sem treino.</div></div>
+    <div class="prog-item"><span class="prog-icon">🔄</span><div class="prog-text"><strong>Duração.</strong> Esta ficha é para 12 semanas (Mai–Jul 2026). Após isso reavalie e ajuste.</div></div>
+  </div>
+</div>
+
+<div class="footer">Márcio · Hipertrofia 4×/semana · Mai–Jul 2026 · Checks resetam em 15h · Cargas salvas permanentemente</div>
+</div><!-- /main -->
+
+<!-- TIMER TOAST -->
+<div id="toast">
+  <div style="display:flex;flex-direction:column;gap:2px">
+    <div id="toast-label">DESCANSO</div>
+    <div id="toast-time">00:00</div>
+  </div>
+  <div id="toast-close" onclick="stopTimer()">✕</div>
+</div>
+
+<script>
+const SKEY  = 'marcio_checks_v3';   // checks — expiram em 15h
+const LKEY  = 'marcio_loads_v3';    // cargas — permanentes
+const EXP_H = 15;
+const TOTALS = {A:8,B:8,C:8,D:9};
+
+function getState(){
+  try{
+    const r = localStorage.getItem(SKEY);
+    if(!r) return {c:{},ts:Date.now()};
+    const d = JSON.parse(r);
+    if((Date.now()-d.ts)/36e5 > EXP_H){ localStorage.removeItem(SKEY); return {c:{},ts:Date.now()}; }
+    return d;
+  }catch{return {c:{},ts:Date.now()};}
+}
+function save(s){ s.ts=Date.now(); localStorage.setItem(SKEY,JSON.stringify(s)); }
+
+function getLoads(){
+  try{ return JSON.parse(localStorage.getItem(LKEY)||'{}'); }catch{ return {}; }
+}
+function saveLoad(day,num,val){
+  const l=getLoads(); l[day+'-'+num]=val;
+  localStorage.setItem(LKEY,JSON.stringify(l));
+}
+
+let curDay='A';
+
+function switchDay(d){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+d).classList.add('active');
+  document.querySelector('.tab[data-d="'+d+'"]').classList.add('active');
+  curDay=d;
+}
+
+function toggleEx(day,num){
+  const s=getState(); const k=day+'-'+num;
+  s.c[k]=!s.c[k]; save(s);
+  applyEx(day,num,s.c[k]); updateProg(day,s);
+}
+function applyEx(day,num,done){
+  const card=document.getElementById(day+'-'+num); if(!card)return;
+  card.classList.toggle('done',done);
+  card.querySelector('.ex-num').textContent=done?'✓':num.toString().padStart(2,'0');
+}
+function updateProg(day,s){
+  const tot=TOTALS[day]; let done=0;
+  for(let i=1;i<=tot;i++) if(s.c[day+'-'+i]) done++;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('pf-'+day).style.width=pct+'%';
+  document.getElementById('pp-'+day).textContent=done+'/'+tot;
+  document.getElementById('tc-'+day).textContent=done+'/'+tot;
+}
+function resetDay(day){
+  const s=getState(); const tot=TOTALS[day];
+  for(let i=1;i<=tot;i++){ s.c[day+'-'+i]=false; applyEx(day,i,false); }
+  document.querySelectorAll('[id^="fn-'+day+'"]').forEach(e=>e.classList.remove('done-f'));
+  save(s); updateProg(day,s);
+}
+
+function toggleFin(day,num){
+  document.getElementById('fn-'+day+'-'+num)?.classList.toggle('done-f');
+}
+function toggleCol(btn,id){
+  btn.classList.toggle('open');
+  document.getElementById(id).classList.toggle('open');
+}
+
+// TIMER
+let tInt=null, tSec=0;
+function startTimer(sec,lbl){
+  stopTimer(); tSec=sec;
+  document.getElementById('toast-label').textContent=lbl.toUpperCase();
+  document.getElementById('toast').className='show';
+  render();
+  tInt=setInterval(()=>{
+    tSec--;render();
+    if(tSec<=5) document.getElementById('toast').classList.add('urgent');
+    if(tSec<=0){stopTimer();beep();}
+  },1000);
+}
+function stopTimer(){ clearInterval(tInt); document.getElementById('toast').className=''; }
+function render(){
+  const m=String(Math.floor(tSec/60)).padStart(2,'0');
+  const s=String(tSec%60).padStart(2,'0');
+  document.getElementById('toast-time').textContent=m+':'+s;
+}
+function beep(){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [0,200,400].forEach(d=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=880;o.type='sine';
+      g.gain.setValueAtTime(.3,ctx.currentTime+d/1000);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+d/1000+.3);
+      o.start(ctx.currentTime+d/1000);o.stop(ctx.currentTime+d/1000+.35);
+    });
+  }catch(e){}
+}
+
+// INIT
+function init(){
+  const s=getState();
+  ['A','B','C','D'].forEach(d=>{
+    const tot=TOTALS[d];
+    for(let i=1;i<=tot;i++) if(s.c[d+'-'+i]) applyEx(d,i,true);
+    updateProg(d,s);
+    const l=getLoads(); for(let i=1;i<=tot;i++){
+      const inp=document.getElementById('ld-'+d+'-'+i);
+      if(inp&&l[d+'-'+i]) inp.value=l[d+'-'+i];
+    }
+  });
+}
+init();
+</script>
+</body>
+</html>
