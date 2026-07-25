@@ -1,4 +1,4 @@
-fetch('/library/getOauthInfo', {
+fetch('https://www.snapfish.com/library/getOauthInfo', {
     credentials: 'include'
 })
 .then(function (r) {
@@ -8,5 +8,5 @@ fetch('/library/getOauthInfo', {
     alert(data.oauthInfo.oa2);
 })
 .catch(function (e) {
-   class alert('Error: ' + e);
+    alert('Error: ' + e);
 });
