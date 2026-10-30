@@ -237,7 +237,7 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
       <div class="topbar-icon">💪</div>
       <div>
         <div class="topbar-name">Márcio</div>
-        <div class="topbar-sub">Hipertrofia · 28/10/2026 a 19/01/2027 · 4×/semana</div>
+        <div class="topbar-sub" id="top-dates">Hipertrofia · 28/10/2026 a 19/01/2027 · 4×/semana</div>
       </div>
     </div>
   </div>
@@ -261,7 +261,16 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
         <thead><tr><th>Semanas</th><th>Fase</th><th>Compostos</th><th>Isoladores</th><th>Técnicas</th></tr></thead>
         <tbody></tbody>
       </table>
-      <div class="tbl-note">Sextas 25/12 e 01/01 são feriados: faça o treino de Ombros e Braços no sábado. Deload: metade das séries (arredonde para cima), mesmas cargas.</div>
+      <div class="tbl-note">As datas se ajustam sozinhas quando você pausa uma semana. Feriados aparecem como aviso no topo da semana. Deload: metade das séries (arredonde para cima), mesmas cargas.</div>
+    </div>
+  </div>
+
+  <!-- PAUSAS -->
+  <button class="collapse-btn" onclick="toggleCol(this,'pa-body')"><span>⏸ Semanas pausadas</span><span class="arr">▾</span></button>
+  <div class="collapse-body" id="pa-body">
+    <div class="finisher" style="margin-top:8px">
+      <div class="tbl-note" style="padding:0 0 10px">Toque numa semana para pausar ou retomar. Semana pausada não conta: o bloco continua de onde parou e o fim é adiado. Cada semana vai de <strong>quarta a terça</strong>, porque o bloco começou numa quarta. Faltou só 1 ou 2 treinos? Não pause, siga em frente.</div>
+      <div id="pause-list"></div>
     </div>
   </div>
 
@@ -330,8 +339,8 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
   <button class="collapse-btn" onclick="toggleCol(this,'nu-body')"><span>🍽️ Fora do treino (o maior gargalo)</span><span class="arr">▾</span></button>
   <div class="collapse-body" id="nu-body">
     <div class="prog-list">
-      <div class="prog-item"><span class="prog-icon">⚡</span><div class="prog-text"><strong>Calorias.</strong> Peso parado = você come o que gasta. Some +200 a 300 kcal/dia. Pese 3x por semana em jejum e acompanhe a média de 7 dias. Meta: <strong>+0,1 a 0,2 kg por semana</strong>. Se a média não subir em 2 a 3 semanas, acrescente 100 a 150 kcal.</div></div>
-      <div class="prog-item"><span class="prog-icon">🥩</span><div class="prog-text"><strong>Proteína: 130 a 140 g/dia</strong>, em 3 a 5 refeições. Hoje está abaixo de 100 g.</div></div>
+      <div class="prog-item"><span class="prog-icon">⚡</span><div class="prog-text"><strong>Calorias.</strong> Você foi de 68 para 70 kg, mas hoje está estável: está comendo o que gasta. Some +200 a 300 kcal/dia. Pese 3x por semana em jejum e acompanhe a média de 7 dias. Meta: <strong>+0,1 a 0,2 kg por semana</strong>. Se a média não subir em 2 a 3 semanas, acrescente 100 a 150 kcal.</div></div>
+      <div class="prog-item"><span class="prog-icon">🥩</span><div class="prog-text"><strong>Proteína: 130 a 140 g/dia</strong> (cerca de 1,9 a 2 g/kg para 70 kg), em 3 a 5 refeições. Hoje está abaixo de 100 g.</div></div>
       <div class="prog-item"><span class="prog-icon">😴</span><div class="prog-text"><strong>Sono.</strong> Horário fixo e 7 a 9 h por noite. Uma noite sem dormir já reduz a síntese de proteína muscular.</div></div>
       <div class="prog-item"><span class="prog-icon">💊</span><div class="prog-text"><strong>Creatina.</strong> Continue: 3 a 5 g/dia, todos os dias.</div></div>
     </div>
@@ -341,7 +350,7 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
   <button class="collapse-btn" onclick="toggleCol(this,'seg-body')"><span>🛟 Segurança treinando sozinho</span><span class="arr">▾</span></button>
   <div class="collapse-body" id="seg-body">
     <div class="prog-list">
-      <div class="prog-item"><span class="prog-icon">🏋️</span><div class="prog-text"><strong>Supino com halteres:</strong> use presilhas bem presas (ou halteres fixos). Para abortar a série, desça os halteres até o peito, gire levemente o tronco e solte cada um para o lado, perto do chão. Ou traga os joelhos para cima e apoie os halteres nas coxas.</div></div>
+      <div class="prog-item"><span class="prog-icon">🏋️</span><div class="prog-text"><strong>Supinos com halteres (inclinado e reto):</strong> use presilhas bem presas (ou halteres fixos). Para abortar a série, desça os halteres até o peito, gire levemente o tronco e solte cada um para o lado, perto do chão. Ou traga os joelhos para cima e apoie os halteres nas coxas.</div></div>
       <div class="prog-item"><span class="prog-icon">🔒</span><div class="prog-text"><strong>Smith:</strong> ajuste as travas de segurança logo abaixo da menor altura do movimento antes da 1ª série.</div></div>
       <div class="prog-item"><span class="prog-icon">🎯</span><div class="prog-text"><strong>Falha real (RIR 0) só em máquinas e polias.</strong> Barra, Smith e halteres ficam com pelo menos 1 rep em reserva.</div></div>
     </div>
@@ -360,7 +369,7 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
     </div>
   </div>
 
-  <div class="footer">Márcio · Hipertrofia 4×/semana · 28/10/2026 a 19/01/2027</div>
+  <div class="footer" id="foot-dates">Márcio · Hipertrofia 4×/semana · 28/10/2026 a 19/01/2027</div>
 </div>
 
 <div id="toast">
@@ -376,7 +385,7 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
     <div class="expiry-icon">🏆</div>
     <div class="expiry-title">Bloco concluído!</div>
     <div class="expiry-days" id="expiry-days-count"></div>
-    <div class="expiry-sub">Você completou as <strong>12 semanas</strong> (28/10/2026 a 19/01/2027).<br><br>Hora de reavaliar fotos, peso, medidas e cargas e montar o próximo bloco.</div>
+    <div class="expiry-sub">Você completou as <strong>12 semanas</strong> (<span id="exp-dates">28/10/2026 a 19/01/2027</span>).<br><br>Hora de reavaliar fotos, peso, medidas e cargas e montar o próximo bloco.</div>
     <button class="expiry-btn" onclick="document.getElementById('expiry-banner').classList.remove('show')">Continuar mesmo assim</button>
   </div>
 </div>
@@ -384,7 +393,6 @@ h1,h2,h3,.label { font-family:'Montserrat',sans-serif; }
 <script>
 /* ================= CONFIG ================= */
 const START = new Date(2026, 9, 28);        // 28/10/2026, semana 1
-const END_EXPIRY = new Date(2027, 0, 20);   // dia seguinte ao fim da semana 12
 const SKEY = 'marcio_checks_v4';            // checks: expiram em 15h
 const LKEY = 'marcio_loads_v4';             // cargas e reps: permanentes
 const EXP_H = 15;
@@ -404,26 +412,28 @@ const DAYS = {
     dia:"Segunda", tab:"Torso A", titulo:"Torso A", sub:"Peito superior · Largura de costas · Braços",
     foco:"🎯 Peito superior, dorsal e cabeça longa do tríceps", aquec:"5 min esteira",
     ex:[
-      { g:"Peito e costas", n:"Supino Inclinado no Smith", tipo:"comp", s:4, r:"6-10", d:150, anchor:true,
-        yt:"supino inclinado no smith execução",
-        note:"<strong>Âncora: anote carga e reps.</strong> Banco a 30°, escápulas presas, desça até tocar o alto do peito sem quicar. Smith porque você treina sozinho: ajuste as travas." },
+      { g:"Peito e costas", n:"Supino Inclinado c/ Halter", tipo:"comp", s:4, r:"6-10", d:150, anchor:true,
+        yt:"[supino inclinado] [com halteres] execução",
+        note:"<strong>Âncora: anote carga e reps. RIR mínimo 1.</strong> Continue de onde parou na ficha anterior. Banco a 30°, escápulas presas, desça até os halteres ficarem na altura do alto do peito, cotovelos a cerca de 45° do tronco.",
+        alt:{ txt:"Se posicionar os halteres pesados virar o limite da série, troque por Supino Inclinado no Smith (4 × 6-10, 150s, travas ajustadas).",
+              links:[ {n:"Supino Inclinado no Smith", yt:"[supino inclinado] [no smith] execução"} ] } },
       { g:"Peito e costas", n:"Pulley Frente Pegada Neutra", tipo:"comp", s:4, r:"8-12", d:120,
-        yt:"puxada frente pegada neutra execução",
+        yt:"[puxada frente] [pegada neutra] execução",
         note:"Deixe os ombros subirem no topo para <strong>alongar o dorsal</strong>. Puxe levando os cotovelos em direção aos bolsos." },
       { g:"Peito e costas", n:"Crucifixo Banco Inclinado na Polia", tipo:"iso", s:3, r:"10-15", d:90, plus:true,
-        yt:"crucifixo banco inclinado na polia execução",
+        yt:"crucifixo inclinado [na polia] banco execução",
         note:"Banco a 30°, polias baixas. <strong>Pausa de 1 s no alongamento</strong>, embaixo. A polia mantém tensão onde o peito está mais esticado." },
       { g:"Peito e costas", n:"Remada Unilateral c/ Halter", tipo:"comp", s:3, r:"8-12", d:90, uni:true, porLado:true,
-        yt:"remada unilateral com halter execução",
+        yt:"[remada unilateral] [com halter] execução",
         note:"<strong>Comece pelo esquerdo</strong>; o direito copia as reps. Cotovelo em direção ao quadril, deixe a escápula descer e avançar embaixo." },
       { g:"Ombro", n:"Elevação Lateral Unilateral na Polia", tipo:"iso", s:3, r:"12-15", d:75, uni:true, tech:{f2:true, f3:"drop"},
-        yt:"elevação lateral unilateral na polia execução",
+        yt:"[elevação lateral] [na polia] unilateral execução",
         note:"Polia na altura do quadril, cabo passando <strong>por trás do corpo</strong>. Comece pelo esquerdo. Suba até a linha do ombro." },
       { g:"Braços", n:"Tríceps Francês Corda na Polia", tipo:"iso", s:4, r:"10-15", d:90, plus:true,
-        yt:"tríceps francês corda na polia execução",
+        yt:"[tríceps francês] [na polia] corda execução",
         note:"De costas para a polia, cotovelos apontados para frente e para cima. Desça até <strong>alongar bem atrás do braço</strong>. Principal exercício da cabeça longa." },
       { g:"Braços", n:"Rosca Direta c/ Barra W", tipo:"iso", s:3, r:"8-12", d:90,
-        yt:"rosca direta barra W execução",
+        yt:"[rosca direta] [barra W] execução",
         note:"Cotovelos fixos, <strong>sem balançar o tronco</strong>. Estenda o cotovelo por completo embaixo." }
     ],
     fin:{ titulo:"🏁 Opcional · Abdômen", itens:[ { t:"ABS Infra Barra Paralela · 2 × 10-15 · 60s", yt:"elevação de pernas na paralela execução" } ] }
@@ -433,27 +443,27 @@ const DAYS = {
     foco:"🎯 Manter e evoluir as pernas com volume enxuto", aquec:"5 min esteira",
     ex:[
       { g:"Quadríceps e posterior", n:"Agachamento Hack (Hack Machine)", tipo:"comp", s:4, r:"6-10", d:180, anchor:true,
-        yt:"agachamento hack machine execução",
+        yt:"agachamento [hack machine] execução",
         note:"<strong>Âncora: anote carga e reps.</strong> Desça o máximo possível com a lombar colada no encosto. A máquina permite chegar perto da falha sozinho com segurança." },
       { g:"Quadríceps e posterior", n:"Cadeira Flexora Sentada", tipo:"iso", s:4, r:"8-12", d:90,
-        yt:"cadeira flexora sentada execução",
+        yt:"[flexora sentada] execução",
         note:"Incline levemente o tronco à frente: o posterior fica <strong>mais alongado</strong> e cresce mais do que na flexora deitada." },
       { g:"Quadríceps e posterior", n:"Leg Press 45°", tipo:"comp", s:3, r:"10-15", d:120,
         yt:"leg press 45 execução",
         note:"Desça até o limite <strong>sem o quadril descolar</strong> do banco. Não trave os joelhos no topo." },
       { g:"Quadríceps e posterior", n:"Stiff c/ Halter", tipo:"comp", s:3, r:"8-12", d:120, confirm:true,
-        yt:"stiff com halteres execução",
-        note:"Joelhos semiflexionados, quadril vai para trás até alongar o posterior, <strong>coluna neutra</strong>. Use straps se a pegada falhar.",
+        yt:"stiff [com halteres] execução",
+        note:"<strong>Movimento novo para você</strong> (nunca esteve em nenhuma ficha): use carga leve nas semanas 1 a 3 e veja o vídeo antes. Joelhos semiflexionados, quadril vai para trás até alongar o posterior, <strong>coluna neutra</strong>. Use straps se a pegada falhar.",
         alt:{ txt:"Sem halteres pesados o bastante? Faça Stiff c/ Barra (3 × 8-12). Se nenhum der: Mesa Flexora 3 × 10-12, 90s.",
-              links:[ {n:"Stiff c/ Barra", yt:"stiff com barra execução"}, {n:"Mesa Flexora", yt:"mesa flexora execução"} ] } },
+              links:[ {n:"Stiff c/ Barra", yt:"stiff [com barra] execução"}, {n:"Mesa Flexora", yt:"mesa flexora execução"} ] } },
       { g:"Quadríceps e posterior", n:"Cadeira Extensora", tipo:"iso", s:3, r:"12-15", d:90, tech:{f2:true, f3:"drop"},
         yt:"cadeira extensora execução",
         note:"Pausa de 1 s no topo e <strong>controle a descida</strong>." },
       { g:"Panturrilha e core", n:"Gêmeos em Pé Máquina", tipo:"iso", s:4, r:"8-12", d:90,
-        yt:"panturrilha em pé máquina execução",
+        yt:"[panturrilha em pé] máquina execução",
         note:"<strong>Pausa de 2 s embaixo</strong>, no alongamento, sem quicar. Suba até o máximo." },
       { g:"Panturrilha e core", n:"Abdominal Máquina", tipo:"iso", s:3, r:"10-15", d:60,
-        yt:"abdominal máquina execução",
+        yt:"[abdominal na máquina] execução",
         note:"Enrole a coluna, não puxe com os braços. Controle a volta." }
     ]
   },
@@ -462,29 +472,29 @@ const DAYS = {
     foco:"🎯 Peito inferior e miolo das costas", aquec:"5 min esteira",
     ex:[
       { g:"Peito e costas", n:"Supino Reto c/ Halter", tipo:"comp", s:4, r:"6-10", d:150, anchor:true,
-        yt:"supino reto com halteres execução",
+        yt:"[supino reto] [com halteres] execução",
         note:"<strong>Âncora: anote carga e reps. RIR mínimo 1.</strong> Para abortar: desça os halteres ao peito e solte para os lados, perto do chão. Presilhas bem presas.",
         alt:{ txt:"Se colocar os halteres em posição virar o limite da série, troque por Supino Reto no Smith (4 × 6-10, 150s, travas ajustadas).",
-              links:[ {n:"Supino Reto no Smith", yt:"supino reto no smith execução"} ] } },
+              links:[ {n:"Supino Reto no Smith", yt:"[supino reto] [no smith] execução"} ] } },
       { g:"Peito e costas", n:"Remada Curvada no Smith", tipo:"comp", s:4, r:"6-10", d:150, anchor:true, anchorTxt:"⚓ Âncora costas",
-        yt:"remada curvada no smith execução",
+        yt:"[remada curvada] [no smith] execução",
         note:"Use <strong>straps</strong>. Tronco a cerca de 45°, puxe em direção ao umbigo." },
       { g:"Peito e costas", n:"Paralelas (mergulho para peito)", tipo:"comp", s:3, r:"6-12", d:120, confirm:true,
-        yt:"mergulho paralelas para peito execução",
+        yt:"[mergulho] [paralelas] peito execução",
         note:"<strong>Tronco inclinado à frente</strong>, desça até o ombro passar um pouco do cotovelo. Passou de 12 reps no RIR alvo: adicione carga.",
         alt:{ txt:"Sem paralelas? Faça Supino Vertical Máquina 3 × 8-12, 120s, com o banco mais alto.",
-              links:[ {n:"Supino Vertical Máquina", yt:"supino vertical máquina execução"} ] } },
+              links:[ {n:"Supino Vertical Máquina", yt:"[supino vertical] máquina execução"} ] } },
       { g:"Peito e costas", n:"Remada Baixa na Polia Pegada Aberta", tipo:"comp", s:3, r:"10-12", d:90,
-        yt:"remada baixa polia pegada aberta execução",
+        yt:"[remada baixa] [pegada aberta] execução",
         note:"Cotovelos abertos a cerca de 45°, foco no meio das costas. <strong>Deixe alongar à frente</strong> sem arredondar a coluna." },
       { g:"Peito e costas", n:"Crucifixo no Cross (polia alta para baixo)", tipo:"iso", s:3, r:"12-15", d:90, plus:true, tech:{f2:false, f3:"drop"},
-        yt:"crossover polia alta peito inferior execução",
+        yt:"crossover [polia alta] peito inferior execução",
         note:"As mãos terminam <strong>na altura do quadril</strong>. Foco no peito inferior." },
       { g:"Peito e costas", n:"Puxada Corda na Polia Alta (braços estendidos)", tipo:"iso", s:3, r:"12-15", d:75,
-        yt:"pulldown braços estendidos corda polia execução",
+        yt:"pulldown [braços estendidos] execução",
         note:"Braços quase estendidos, leve a corda até as coxas. <strong>Deixe subir até alongar</strong> o dorsal." },
       { g:"Ombro", n:"Elevação Lateral c/ Halter", tipo:"iso", s:3, r:"15-20", d:75,
-        yt:"elevação lateral com halteres execução",
+        yt:"[elevação lateral] [com halteres] execução",
         note:"Suba até a linha do ombro e desça controlando. Cotovelos levemente dobrados." }
     ]
   },
@@ -493,28 +503,28 @@ const DAYS = {
     foco:"🎯 Ombro largo, pico do bíceps e lado esquerdo", aquec:"5 min esteira",
     ex:[
       { g:"Ombros", n:"Desenvolvimento c/ Halter (sentado)", tipo:"comp", s:3, r:"8-12", d:120,
-        yt:"desenvolvimento com halteres sentado execução",
+        yt:"desenvolvimento [com halteres] sentado execução",
         note:"Encosto a cerca de 80°, desça até o halter chegar <strong>à altura da orelha</strong>." },
       { g:"Ombros", n:"Elevação Lateral c/ Halter Unilateral", tipo:"iso", s:4, r:"12-20", d:75, uni:true,
-        yt:"elevação lateral unilateral com halter inclinado execução",
+        yt:"[elevação lateral unilateral] halter execução",
         note:"Segure num apoio e incline o corpo levemente para o lado oposto. <strong>Comece pelo esquerdo.</strong>" },
       { g:"Ombros", n:"Crucifixo Inverso Máquina", tipo:"iso", s:3, r:"12-20", d:75,
-        yt:"crucifixo inverso máquina execução",
+        yt:"[crucifixo inverso] máquina execução",
         note:"Braços quase estendidos. Pense em levar as mãos <strong>para longe</strong>, e não para trás." },
       { g:"Braços", n:"Rosca Scott Máquina", tipo:"iso", s:3, r:"8-12", d:90, plus:true, tech:{f2:false, f3:"rp"},
-        yt:"rosca scott máquina execução",
+        yt:"[rosca scott] máquina execução",
         note:"Desça em cerca de 2 s até <strong>quase estender</strong>, sem descansar embaixo." },
       { g:"Braços", n:"Tríceps Testa Barra W", tipo:"iso", s:3, r:"8-12", d:90,
-        yt:"tríceps testa barra W execução",
+        yt:"[tríceps testa] [barra W] execução",
         note:"Leve a barra <strong>para trás da cabeça</strong>, cotovelos levemente inclinados para trás, para alongar a cabeça longa." },
       { g:"Braços", n:"Rosca Unilateral na Polia (braço atrás do corpo)", tipo:"iso", s:3, r:"10-15", d:[75,90], left:true,
-        yt:"rosca bayesiana polia execução",
+        yt:"[rosca bayesiana] execução",
         note:"De costas para a polia baixa. <strong>A série extra do esquerdo é a primeira.</strong> O direito copia as reps do esquerdo." },
       { g:"Braços", n:"Tríceps Unilateral na Polia", tipo:"iso", s:3, r:"12-15", d:[75,90], left:true,
-        yt:"tríceps unilateral na polia execução",
+        yt:"[tríceps unilateral] polia execução",
         note:"Cotovelo fixo ao lado do corpo. <strong>A série extra do esquerdo é a primeira.</strong> O direito copia as reps." }
     ],
-    fin:{ titulo:"🏁 Opcional · Trapézio", itens:[ { t:"Encolhimento Ombro c/ Halter · 3 × 10-15 · 75s (primeiro a cortar)", yt:"encolhimento com halteres execução" } ] },
+    fin:{ titulo:"🏁 Opcional · Trapézio", itens:[ { t:"Encolhimento Ombro c/ Halter · 3 × 10-15 · 75s (primeiro a cortar)", yt:"encolhimento [com halteres] execução" } ] },
     tip:"⏱️ Se o tempo apertar: faça Scott + Testa e Rosca Unilateral + Tríceps Unilateral em bi-set, com 60 a 75 s entre um e outro."
   }
 };
@@ -537,30 +547,77 @@ function save(s){ s.ts=Date.now(); lsSet(SKEY,JSON.stringify(s)); }
 function getLoads(){ try{ return JSON.parse(lsGet(LKEY)||'{}'); }catch(e){ return {}; } }
 function saveField(key,val){ const l=getLoads(); l[key]=val; lsSet(LKEY,JSON.stringify(l)); }
 
-/* ================= SEMANA / FASE ================= */
-function autoWeek(){
-  const now = new Date(); now.setHours(0,0,0,0);
-  const diff = Math.floor((now - START)/864e5);
-  return Math.min(12, Math.max(1, Math.floor(diff/7)+1));
-}
-let WEEK = autoWeek();
-function phaseOf(w){ return PHASES.find(p => w>=p.w[0] && w<=p.w[1]); }
+/* ================= SEMANA / FASE / PAUSAS =================
+   O bloco conta semanas a partir de START (quarta a terça).
+   Cada semana marcada como pausada não conta: o bloco anda 1 semana para frente. */
+const PKEY = 'marcio_paused_v1';
+const HOLIDAYS = [
+  {d:new Date(2026,10,2),  nome:'Finados'},
+  {d:new Date(2026,10,20), nome:'Consciência Negra'},
+  {d:new Date(2026,11,25), nome:'Natal'},
+  {d:new Date(2027,0,1),   nome:'Ano Novo'}
+];
+const WEEKDAYS = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+
+function getPaused(){ try{ const a=JSON.parse(lsGet(PKEY)||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function setPaused(a){ lsSet(PKEY, JSON.stringify([...new Set(a)].sort((x,y)=>x-y))); }
 function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
 function fmt(d){ return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0'); }
-function weekRange(w1,w2){ return fmt(addDays(START,(w1-1)*7))+' a '+fmt(addDays(START,(w2-1)*7+6)); }
+function fmtY(d){ return fmt(d)+'/'+d.getFullYear(); }
+function today0(){ const n=new Date(); n.setHours(0,0,0,0); return n; }
+
+/* semana do calendário (1, 2, 3...) contada a partir do início, sem pausas */
+function calWeekToday(){ return Math.max(1, Math.floor((today0()-START)/864e5/7)+1); }
+function calStart(c){ return addDays(START,(c-1)*7); }
+/* semana de treino w (1 a 12) cai em qual semana do calendário */
+function calOfTraining(w){ const P=new Set(getPaused()); let c=0,n=0; while(n<w){ c++; if(!P.has(c)) n++; } return c; }
+/* semana de treino em que você está hoje */
+function autoWeek(){
+  const P=new Set(getPaused()); const c=calWeekToday(); let n=0;
+  for(let i=1;i<=c;i++) if(!P.has(i)) n++;
+  if(P.has(c)) n++;               // semana pausada: mostra a semana em que você vai retomar
+  return Math.min(12, Math.max(1, n));
+}
+function todayPaused(){ return getPaused().includes(calWeekToday()); }
+function weekRange(w1,w2){ return fmt(calStart(calOfTraining(w1)))+' a '+fmt(addDays(calStart(calOfTraining(w2)),6)); }
+function blockEnd(){ return addDays(calStart(calOfTraining(12)),6); }
+
+let WEEK = autoWeek();
+function phaseOf(w){ return PHASES.find(p => w>=p.w[0] && w<=p.w[1]); }
+
+function holidayWarn(w){
+  const s=calStart(calOfTraining(w)), e=addDays(s,6);
+  return HOLIDAYS.filter(h=>h.d>=s && h.d<=e).map(h=>
+    '<div class="phase-warn">⚠️ '+fmt(h.d)+' ('+WEEKDAYS[h.d.getDay()]+') é '+h.nome+'. Se a academia fechar, faça esse treino no dia seguinte.</div>'
+  ).join('');
+}
 
 function renderPhase(){
   const p = phaseOf(WEEK);
   const isAuto = WEEK===autoWeek();
-  let warn = '';
-  if(WEEK===9) warn = '<div class="phase-warn">⚠️ Sexta 25/12 é Natal: faça Ombros e Braços no sábado.</div>';
-  if(WEEK===10) warn = '<div class="phase-warn">⚠️ Sexta 01/01 é Ano Novo: faça Ombros e Braços no sábado.</div>';
-  if(WEEK===6||WEEK===7) warn = '<div class="phase-warn">📈 Semana de +1 série nos exercícios marcados, se você progrediu nas semanas 4 e 5.</div>';
+  const nPause = getPaused().length;
+  const pauseInfo = nPause ? '<div class="phase-dates">⏸ '+nPause+' semana'+(nPause>1?'s':'')+' pausada'+(nPause>1?'s':'')+' · fim do bloco: '+fmtY(blockEnd())+'</div>' : '';
+
+  /* semana atual pausada */
+  if(isAuto && todayPaused()){
+    const c=calWeekToday();
+    document.getElementById('phase').innerHTML =
+      '<div class="phase-top"><div>'+
+        '<div class="phase-week">⏸ Semana pausada</div>'+
+        '<div class="phase-dates">'+fmt(calStart(c))+' a '+fmt(addDays(calStart(c),6))+' não conta no bloco</div>'+pauseInfo+
+      '</div></div>'+
+      '<div class="phase-tec">Quando voltar, você continua na <strong>Semana '+WEEK+' ('+p.nome+')</strong>, a partir de '+fmt(calStart(calOfTraining(WEEK)))+'.</div>'+
+      '<div class="actions-row" style="margin-top:10px"><button class="week-auto" style="color:#fff" onclick="togglePause('+c+')">▶ Retomar: vou treinar esta semana</button></div>';
+    return;
+  }
+
+  let warn = holidayWarn(WEEK);
+  if(WEEK===6||WEEK===7) warn += '<div class="phase-warn">📈 Semana de +1 série nos exercícios marcados, se você progrediu nas semanas 4 e 5.</div>';
   document.getElementById('phase').innerHTML =
     '<div class="phase-top"><div>'+
       '<div class="phase-week">Semana '+WEEK+' de 12</div>'+
       '<div class="phase-name">'+p.nome+'</div>'+
-      '<div class="phase-dates">'+weekRange(WEEK,WEEK)+(isAuto?' · semana atual':'')+'</div>'+
+      '<div class="phase-dates">'+weekRange(WEEK,WEEK)+(isAuto?' · semana atual':'')+'</div>'+pauseInfo+
     '</div><div class="week-nav">'+
       '<button class="week-btn" onclick="setWeek(WEEK-1)" aria-label="Semana anterior">‹</button>'+
       '<button class="week-btn" onclick="setWeek(WEEK+1)" aria-label="Próxima semana">›</button>'+
@@ -570,15 +627,57 @@ function renderPhase(){
       '<div class="phase-box"><div class="phase-box-lbl">Compostos</div><div class="phase-box-val">'+p.comp+'</div></div>'+
       '<div class="phase-box"><div class="phase-box-lbl">Isoladores</div><div class="phase-box-val">'+p.iso+'</div></div>'+
     '</div>'+
-    '<div class="phase-tec">'+p.tec+'</div>'+warn;
+    '<div class="phase-tec">'+p.tec+'</div>'+warn+
+    (isAuto ? '<div class="actions-row" style="margin-top:10px"><button class="week-auto" onclick="togglePause('+calWeekToday()+')">⏸ Não vou treinar esta semana</button></div>' : '');
 }
 function setWeek(w){
   WEEK = Math.min(12, Math.max(1, w));
-  renderPhase(); renderPanels(); restore();
+  renderAll();
 }
 
+/* pausar ou retomar uma semana do calendário */
+function togglePause(c){
+  let a=getPaused();
+  const s=calStart(c), e=addDays(s,6);
+  if(a.includes(c)){
+    a=a.filter(x=>x!==c);
+  }else{
+    let ok=true;
+    try{ ok=window.confirm('Pausar a semana de '+fmt(s)+' a '+fmt(e)+'?\n\nEla não conta no bloco e o fim é adiado em 1 semana.'); }catch(err){ ok=true; }
+    if(!ok) return;
+    a.push(c);
+  }
+  setPaused(a);
+  WEEK = autoWeek();
+  renderAll();
+}
+
+/* lista de semanas do calendário até hoje, para marcar pausas (inclusive esquecidas) */
+function renderPauseList(){
+  const P=new Set(getPaused()); const cNow=calWeekToday();
+  let rows='';
+  for(let c=cNow;c>=1;c--){
+    const s=calStart(c), e=addDays(s,6), on=P.has(c);
+    rows+='<div class="fin-item" onclick="togglePause('+c+')">'+
+      '<div class="fin-cb" style="'+(on?'background:#f59e0b;border-color:#f59e0b':'')+'"></div>'+
+      '<span class="fin-text">'+fmt(s)+' a '+fmt(e)+(c===cNow?' · <strong>esta semana</strong>':'')+'</span>'+
+      '<span style="font-size:10px;font-weight:700;color:'+(on?'#b45309':'var(--sub)')+'">'+(on?'⏸ PAUSADA':'contando')+'</span></div>';
+  }
+  document.getElementById('pause-list').innerHTML=rows;
+}
+
+/* datas que mudam com as pausas */
+function renderDates(){
+  const ini=fmtY(START), fim=fmtY(blockEnd());
+  document.getElementById('top-dates').textContent='Hipertrofia · '+ini+' a '+fim+' · 4×/semana';
+  document.getElementById('foot-dates').textContent='Márcio · Hipertrofia 4×/semana · '+ini+' a '+fim;
+  document.getElementById('exp-dates').textContent=ini+' a '+fim;
+}
+
+function renderAll(){ renderPhase(); renderPanels(); restore(); renderPauseList(); renderDates(); }
+
 /* ================= RENDER ================= */
-function ytUrl(q){ return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q); }
+function ytUrl(q){ return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q.replace(/\[|\]/g,'"')); }
 function ytBtn(q,label,alt){
   return '<a class="yt-btn'+(alt?' alt':'')+'" href="'+ytUrl(q)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">▶ '+label+'</a>';
 }
@@ -808,8 +907,9 @@ function restore(){
 /* EXPIRY */
 function checkProgramExpiry(){
   const now=new Date();
-  if(now>=END_EXPIRY){
-    const diffDays=Math.floor((now-END_EXPIRY)/864e5);
+  const endX=addDays(blockEnd(),1);
+  if(now>=endX){
+    const diffDays=Math.floor((now-endX)/864e5);
     document.getElementById('expiry-days-count').textContent =
       diffDays===0 ? 'Terminou ontem!' : (diffDays+1)+' dias após o término';
     document.getElementById('expiry-banner').classList.add('show');
@@ -820,9 +920,8 @@ function checkProgramExpiry(){
 (function init(){
   const map={1:'A',2:'B',3:'C',4:'C',5:'D',6:'A',0:'A'};
   curDay=map[new Date().getDay()];
-  renderTabs(); renderPhase(); renderPanels();
+  renderTabs(); renderAll();
   document.querySelector('.tab[data-d="'+curDay+'"]').classList.add('active');
-  restore();
   checkProgramExpiry();
 })();
 </script>
